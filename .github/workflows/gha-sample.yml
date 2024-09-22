@@ -14,7 +14,7 @@ jobs:
         run: |
           sudo apt-get install -y dbus
           sudo service dbus start
-          export $(dbus-launch)
+          eval $(dbus-launch)
           echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS" >> $GITHUB_ENV
           echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS"
       
