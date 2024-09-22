@@ -29,4 +29,6 @@ if response.ok:
         pickle.dump(session.cookies, f)
 else:
     print("ログイン失敗")
-    print(response.text)  # エラーメッセージを表示
+    print("ステータスコード:", response.status_code)
+    print("レスポンスヘッダー:", response.headers)
+    print("レスポンステキスト:", response.text)  # エラーメッセージを表示
