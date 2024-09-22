@@ -1,8 +1,14 @@
 import requests
 import pickle
 
-# MyFitnessPalのURL
-url = 'https://www.myfitnesspal.com/'
+# MyFitnessPalのログインURL
+login_url = 'https://www.myfitnesspal.com/account/login'
+
+# ログイン情報
+payload = {
+    'username': 'taisei12232000m@gmail.com',
+    'password': 'taisei1223'
+}
 
 # ヘッダーの設定
 headers = {
@@ -12,19 +18,15 @@ headers = {
 # セッションを開始
 session = requests.Session()
 
-# 保存したクッキーを読み込む
-with open('cookies.pkl', 'rb') as f:
-    session.cookies.update(pickle.load(f))
-
-# クッキーを利用してリクエストを送信
-response = session.get(url, headers=headers)
+# ログインリクエストを送信
+response = session.post(login_url, data=payload, headers=headers)
 
 # ログインが成功したか確認
 if response.ok:
     print("ログイン成功")
-    # 必要なデータを取得
-    # 例: 今日の食事データを取得
-    # ...
+    # クッキーを保存
+    with open('cookies.pkl', 'wb') as f:
+        pickle.dump(session.cookies, f)
 else:
     print("ログイン失敗")
     print(response.text)  # エラーメッセージを表示
