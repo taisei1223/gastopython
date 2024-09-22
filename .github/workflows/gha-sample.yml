@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: set up DBus
-              run: |
+              run:
               sudo apt-get install -y dbus
               sudo service dbus start
               export $(dbus-launch)
