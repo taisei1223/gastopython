@@ -1,9 +1,46 @@
 #%%
 import myfitnesspal
+import os 
 from datetime import datetime
+import requests
+
+# MyFitnessPalのログインURL
+login_url = 'https://www.myfitnesspal.com/account/login'
+
+# ログイン情報
+payload = {
+    'username': 'taisei12232000m@gmail.com',
+    'password': 'taisei1223'
+}
+
+# ヘッダーの設定
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
+}
+
+# セッションを開始
+session = requests.Session()
+
+# ログインリクエストを送信
+response = session.post(login_url, data=payload, headers=headers)
+
+# ログインが成功したか確認
+if response.ok:
+    print("ログイン成功")
+    # クッキーを取得
+    cookies = session.cookies.get_dict()
+    print(cookies)
+else:
+    print("ログイン失敗")
+    print(response.text)  # エラーメッセージを表示
+    
+#%%   
 
 #myfittnesspal との接続
+
 client = myfitnesspal.Client()
+value=os.environ.get('DBUS_SESSION_BUS_ADDRESS')
+print(value)
 
 # 文字変換の関数
 def translate_to_japanese(data):
