@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: set up DBus
-              run:
-              sudo apt-get install -y dbus
-              sudo service dbus start
-              export $(dbus-launch)
-              echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS" >> $GITHUB_ENV
+        run: |
+          sudo apt-get install -y dbus
+          sudo service dbus start
+          export $(dbus-launch)
+          echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS" >> $GITHUB_ENV
       
       - uses: actions/checkout@v2
       - name: Setup Python
