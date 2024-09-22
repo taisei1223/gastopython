@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import pickle
 
 # Chromeドライバーのパスを指定
-driver = webdriver.Chrome(executable_path='/path/to/chromedriver')
+driver = webdriver.Chrome('/usr/local/bin/chromedriver')
 
 # MyFitnessPalのログインページにアクセス
 driver.get('https://www.myfitnesspal.com/account/login')
