@@ -8,7 +8,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # ヘッドレスモードで実行
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-dev-shm-usage')
-options.binary_location = '/usr/local/bin/chromedriver'
+options.add_argument('--remote-debugging-port=9222')  # 追加のデバッグポート
 
 # Chromeドライバーのパスを指定
 driver = webdriver.Chrome(options=options)
