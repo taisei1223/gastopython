@@ -1,36 +1,25 @@
-import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 import pickle
 
-# MyFitnessPalのログインURL
-login_url = 'https://www.myfitnesspal.com/account/login'
+# Chromeドライバーのパスを指定
+driver = webdriver.Chrome(executable_path='/path/to/chromedriver')
 
-# ログイン情報
-payload = {
-    'username': 'taisei12232000m@gmail.com',
-    'password': 'taisei1223'
-}
+# MyFitnessPalのログインページにアクセス
+driver.get('https://www.myfitnesspal.com/account/login')
 
-# ヘッダーの設定
-headers = {
-    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36',
-    'Referer': 'https://www.myfitnesspal.com/',
-    'Origin': 'https://www.myfitnesspal.com'
-}
+# ユーザー名とパスワードを入力
+username = driver.find_element(By.NAME, 'username')
+password = driver.find_element(By.NAME, 'password')
+username.send_keys('taisei12232000m@gmail.com')
+password.send_keys('taisei1223')
+password.send_keys(Keys.RETURN)
 
-# セッションを開始
-session = requests.Session()
+# クッキーを保存
+cookies = driver.get_cookies()
+with open('cookies.pkl', 'wb') as f:
+    pickle.dump(cookies, f)
 
-# ログインリクエストを送信
-response = session.post(login_url, data=payload, headers=headers)
-
-# ログインが成功したか確認
-if response.ok:
-    print("ログイン成功")
-    # クッキーを保存
-    with open('cookies.pkl', 'wb') as f:
-        pickle.dump(session.cookies, f)
-else:
-    print("ログイン失敗")
-    print("ステータスコード:", response.status_code)
-    print("レスポンスヘッダー:", response.headers)
-    print("レスポンステキスト:", response.text)  # エラーメッセージを表示
+# ブラウザを閉じる
+driver.quit()
