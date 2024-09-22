@@ -12,7 +12,8 @@ jobs:
     steps:
       - name: set up DBus
         run: |
-          sudo apt-get install -y dbus
+          sudo apt-get update
+          sudo apt-get install -y dbus dbus-x11
           sudo service dbus start
           eval $(dbus-launch)
           echo "DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS" >> $GITHUB_ENV
