@@ -19,7 +19,7 @@ driver.get('https://www.myfitnesspal.com/account/login')
 
 # ユーザー名とパスワードを入力
 time.sleep(3)
-driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div/div[4]/button[1]").click()
+#driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div/div[4]/button[1]").click()
 username = driver.find_element(By.XPATH, '//*[@id="email"]')
 password = driver.find_element(By.XPATH, '//*[@id="password"]')
 username.send_keys('taisei12232000m@gmail.com')
