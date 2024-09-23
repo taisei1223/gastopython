@@ -18,18 +18,20 @@ jobs:
           python-version: '3.8'
           architecture: 'x64'
 
+      - name: Update DNS settings
+        run: |
+          echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null
+          echo "nameserver 8.8.4.4" | sudo tee -a /etc/resolv.conf > /dev/null
+
       - name: Install dependencies
         run: pip install -r requirements.txt
 
       - name: Install Chrome and Chromedriver
         run: |
           sudo apt-get install -y wget unzip
-          # Install the latest version of Google Chrome
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-          # Get the installed Chrome version
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          # Get the corresponding ChromeDriver version
           CHROME_DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*})
           wget https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
