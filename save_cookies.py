@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import pickle
 
+
 # Chromeオプションを設定
 options = webdriver.ChromeOptions()
 options.add_argument('--headless')  # ヘッドレスモードで実行
@@ -17,8 +18,9 @@ driver = webdriver.Chrome(options=options)
 driver.get('https://www.myfitnesspal.com/account/login')
 
 # ユーザー名とパスワードを入力
-username = driver.find_element(By.NAME, 'username')
-password = driver.find_element(By.NAME, 'password')
+driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div/div[4]/button[1]").click()
+username = driver.find_element(By.XPATH, '//*[@id="email"]')
+password = driver.find_element(By.XPATH, '//*[@id="password"]')
 username.send_keys('taisei12232000m@gmail.com')
 password.send_keys('taisei1223')
 password.send_keys(Keys.RETURN)
