@@ -33,8 +33,7 @@ jobs:
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
           wget https://github.com/chromedriver/chromedriver-linux64/archive/refs/tags/2.31.0.zip
           unzip 2.31.0.zip
-          sudo mkdir /usr/bin/chromedriver
-          sudo mv chromedriver-linux64-2.31.0 /usr/bin/chromedriver
+          sudo cp chromedriver-linux64-2.31.0 /usr/bin/chromedriver
 
       - name: Set up DBus
         run: |
